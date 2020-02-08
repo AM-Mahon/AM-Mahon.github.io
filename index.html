@@ -42,8 +42,15 @@
         if(GetURLParameter("identikey") != undefined){
             document.getElementById("def").hidden=true;
             fetch('https://smith-points.herokuapp.com/'+GetURLParameter("identikey"))
-                .then(response => {
-                    console.log(response);
+                .then(function(response){ return response.json();})
+                .then(function(json){
+                    document.getElementById("name").innerHTML=json.first+" "+json.last;
+                    if(json.points == 1){
+                        document.getElementById("points").innerHTML="1 point";
+                    }
+                    else{
+                        document.getElementById("points").innerHTML=json.points+" points"
+                    }
                 })
 
 

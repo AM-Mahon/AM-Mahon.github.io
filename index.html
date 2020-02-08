@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
 <head>
     <link rel="stylesheet" type="text/css" href="index.css">
 </head>
@@ -42,7 +43,13 @@
         if(GetURLParameter("identikey") != undefined){
             document.getElementById("def").hidden=true;
             fetch('https://smith-points.herokuapp.com/'+GetURLParameter("identikey"))
-                .then(function(response){ return response.json();})
+                .then(function(response){ 
+                    if(!response.ok){
+                        document.getElementById("name").innerHTML=GetURLParameter("identikey")+" not found";
+                        document.getElementById("points").innerHTML="It may be misspelled or missing";
+                    }
+                    return response.json();
+                })
                 .then(function(json){
                     document.getElementById("name").innerHTML=json.first+" "+json.last;
                     if(json.points == 1){

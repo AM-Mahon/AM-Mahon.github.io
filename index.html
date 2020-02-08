@@ -46,7 +46,7 @@
         }
         if(GetURLParameter("identikey") != undefined){
             document.getElementById("def").hidden=true;
-            fetch('https://smith-points.herokuapp.com/'+GetURLParameter("identikey"))
+            fetch('https://smith-points.herokuapp.com/get/'+GetURLParameter("identikey"))
                 .then(function(response){ 
                     if(!response.ok){
                         document.getElementById("name").innerHTML=GetURLParameter("identikey")+" not found";
